@@ -9,3 +9,9 @@ Ex1.
 - Multiply rows with 2
 - Как се умножават матрици?
 
+Ex2.
+- Какво прави set.seed(104)? 
+http://rfunction.com/archives/62
+- Какво правят attach и detatch?
+- Характеристики на разпределенията?
+- Какво прави par(mfrow = c(2, 3))?
