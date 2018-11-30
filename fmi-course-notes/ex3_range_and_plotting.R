@@ -143,4 +143,170 @@ abline(
   lty = c(1, rep(3, 3), 1)
 )
 summary(dist1)
+
+# Dist2
+plot(
+  density(dist2), 
+  lwd = 2,
+  main = "Density",
+  xlab = "Normal Distribution",
+  ylab = "Density",
+  col = "lightblue",
+  xlim = range(dist2)
+)
+
+abline(
+  v = fivenum(dist2),
+  lwd = c(1.5, rep(2, 3), 1.5),
+  col = c("black", "red", "red", "red", "black"),
+  lty = c(1, rep(3, 3), 1)
+)
+
+rep(2, 100) # repeat
+
 par(mfrow = c(1, 1))
+
+range(dist1) # Min and Max
+
+#   3.4. Interquartile Range и MAD Median absolute deviation - Wikipedia
+#   Тези два вида оценки на дисперсията е препоръчително да се използват, когато за оценка на центъра
+#   на разпределението се използва медианата. И двете оценки се водят "стабилни" към екстремалните стойности
+
+#   Nielsen Company е публикувала информация колко часа седмично американците прекарват пред телевизора.
+#   Това е извадка от 20 човека
+tv_viewing_times <- c(25, 41, 27, 32, 43, 66, 35, 31, 15, 5, 34, 26, 32, 38, 16, 30, 38, 30, 20, 21)
+
+#   За да покажем как екстремалните стойности влияят върху част от оценките ще добавим голяма стойност,
+#   например 240 часа
+tv_viewing_times_new <- c(tv_viewing_times, 240)
+
+#   Интерквартилния обхват се изчислява като разлика между 3-ти квартил и 1-ви квартил
+summary(tv_viewing_times)
+summary(tv_viewing_times)[c(2, 5)]
+diff(
+  summary(tv_viewing_times)[c(2, 5)]
+)
+
+#   Базовата функция в R се казва IQR()
+IQR(tv_viewing_times)
+
+IQR(tv_viewing_times)
+IQR(tv_viewing_times_new)
+#   Както се вижда няма кой знае колко голяма промяна след добаяването на екстремалната стойност
+
+# Разликата при стандартното отклонение скача в пъти
+sd(tv_viewing_times)
+sd(tv_viewing_times_new)
+
+#   Ето защо при наличието на екстремуми е по-разумно да използваме медианата за оценка на центъра и
+#   IQR или mad за оценка на дисперсията
+
+#   MAD
+#   Оценката MAD представлява медианата на вектора с абсолютните стойности от разлики от стойността и
+#   медианата на самия вектор. Резултатът е умножен по 1.4826
+#   Формулата е записана по-долу
+X_median <- median(tv_viewing_times_new)
+X_median
+table(tv_viewing_times_new) # 240 is extremum!
+
+X_median
+tv_viewing_times_new
+tv_viewing_times_new - X_median
+
+# abs - модул от числата
+X_diff <- abs(tv_viewing_times_new - X_median)
+X_diff
+median(X_diff) * 1.4826 # This is MAD
+
+mad(tv_viewing_times_new)
+
+#   - Добре, при оценката на вариацията имаме значима промяна. Как ли стоят нещата с оценките за центъра?
+#   - Екстремумите оказват влияние и при оценката за центъра. Ето защо, при наличие на такива стойности,
+#   предпочитаме да използваме медианата, вместо средната стойност.
+
+mean(tv_viewing_times)
+mean(tv_viewing_times_new)
+
+median(tv_viewing_times)
+median(tv_viewing_times_new)
+
+# Имаме и други опции при наличието на екстремални стойности - bootstrap метод и trimmed mean.
+
+# Какво прави trim опцията? Тя премахва по част от най-големите и най-малките стойности.
+# В нашия случай, ние сме посочили, че искаме да махмен 5% от най-големите и най-малките стойности.
+# Тоест ще вземем 5/2 = 2.5% от най-малките стойности и 2.5 от най-големите.
+mean(tv_viewing_times, trim = 0.05)
+mean(tv_viewing_times_new, trim = 0.05)
+#   Както виждаме стойностите са близки
+
+
+#   4. Графично представяне на разпределение
+#   4.1. Barplot
+#   Използваме barplot, когато искаме да представим честотното разпределение на категорийни променливи
+set.seed(4012)
+
+fruits <- sample(
+  x = c("Apple", "Banana", "Blackberry", "Peach"), 
+  size = 100, 
+  replace = T,
+  prob = c(0.4, 0.1, 0.3, 0.2)
+)
+
+tt <- table(fruits)
+tt
+
+barplot(
+  height = tt,
+  col = "seagreen3",
+  main = "Barplot"
+)
+
+#   height - приема вектор или матрица с числови стойности като вход. Стойностите могат да бъдат и отрицателни
+#   main - заглавие на графиката
+#   col - цвят на стълбовете
+#   Тези параметри са основни и ги има и при другите графики
+
+barplot(prop.table(tt))
+?prop.table(tt)
+
+#   4.2. Хистограма
+#   Използваме хистограма, когато искаме да представим разпределението на непрекъснати променливи
+set.seed(7821)
+r1 <- rnorm(n = 10^3, mean = 4, sd = 3) # Нормално разпрделение на непрекъснати променливи
+
+hist(
+  r1,
+  main = "Histogram (frequency distribution)",
+  xlab = "Normal distribution",
+  ylab = "Frequency",
+  col = "tomato3"
+)
+
+hist(
+  r1,
+  main = "Histogram (probability distribution)",
+  xlab = "Normal distribution",
+  ylab = "Frequency",
+  col = "tomato3",
+  prob = T
+)
+
+colors() # show all available colors
+
+#   4.3.    Piechart
+#   Използваме piechart-, когато боравим с категорийни променливи и искаме да
+#   изобразим процентното им разпределение
+cities <- c(rep("London", 14), rep("New York", 49), rep("Singapore", 28), rep("Mumbai", 36))
+cities.table <- table(cities)
+cities.table
+
+pie(
+  cities.table,
+  main = "City pie chart",
+  col = rainbow(length(cities.table))
+)
+
+?rainbow(100)
+
+#   Броя на цветовете е хубаво да бъде равен на броя на категориите. В противен случай два сигмента
+#   ще бъдат оцветени в един и същи цвят.
