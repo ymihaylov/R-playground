@@ -51,3 +51,8 @@ Ex3.
 - bootstrap метод и trimmed mean.
 - Кога какви графики използваме?
 - prop.table(tt) - Probability table
+- Какво е outlier?
+- Какво показва boxplot-a?
+- Q-Q plot
+- Cauchy Distribution
+- QQ-plot - last example

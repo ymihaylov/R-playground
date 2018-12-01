@@ -11,12 +11,12 @@ colMeans(basketball_teams)
 apply(basketball_teams, 2, mean)    #   Еквивалентно на горния ред
 
 
-#       Като цяло се избягват заключенията само на база средните стойности или други оценки за 
-#   локацията на разпределенията (ще наблегнем на това при оценките на хипотезите). 
+#       Като цяло се избягват заключенията само на база средните стойности или други оценки за
+#   локацията на разпределенията (ще наблегнем на това при оценките на хипотезите).
 #
-#       И при двета отбора средните стойности са равни - 75. 
-#   Това не означава, че двата отбора са близки относно разпределението на височината им. 
-#   В частност, височината при играчите на втория отбор варира много повече от тази на първия. 
+#       И при двета отбора средните стойности са равни - 75.
+#   Това не означава, че двата отбора са близки относно разпределението на височината им.
+#   В частност, височината при играчите на втория отбор варира много повече от тази на първия.
 
 
 #  3.1. Обхват (Range): максималната стойност - минималната стойност
@@ -31,10 +31,10 @@ rangeFunction(basketball_teams$team2)
 # 3.2. Вариация (дисперсия) и стандартно отклонение
 #	За разлика от обхвата, стандартното отклонение взема под внимамнеи всички наблюдения.
 
-#	Стандартното отклонение е оценка на вариацията, 
+#	Стандартното отклонение е оценка на вариацията,
 # която показва колко далече са наблюденията от очакването (от средното).
 
-# Стандартното отклонение е предпочитана оценка за вариацията, 
+# Стандартното отклонение е предпочитана оценка за вариацията,
 # когато среднoто се използва за оценка на локацията (центъра) на разпределението.
 
 #	Вариацията (дисперсията) се изчислява по формулата по-долу:
@@ -42,7 +42,7 @@ variationFunction <- function(x) {
   x_mean <- mean(x)
   x_minux_xMean <- x - x_mean
   x_minus_xMean_2 <- x_minux_xMean^2
-  
+
   sum(x_minus_xMean_2) / (length(x) - 1)
 }
 
@@ -73,7 +73,7 @@ dist2 <- rgamma(N, 3)
 # Dist 1
 par(mfrow = c(1, 2))
 plot(
-  density(dist1), 
+  density(dist1),
   lwd = 2,
   main = "Density",
   xlab = "Normal Distribution",
@@ -86,7 +86,7 @@ meanDist1 <- mean(dist1)
 sigmaDist1 <- sd(dist1)
 
 abline(
-  v = c(meanDist1 - 3*sigmaDist1, meanDist1, meanDist1 + 3*sigmaDist1), 
+  v = c(meanDist1 - 3*sigmaDist1, meanDist1, meanDist1 + 3*sigmaDist1),
   col = c("green", "red", "green"),
   lwd = 2
 )
@@ -94,7 +94,7 @@ abline(
 # Dist 2
 par(mfrow = c(1, 2))
 plot(
-  density(dist2), 
+  density(dist2),
   lwd = 2,
   main = "Density",
   xlab = "Gamma Distribution",
@@ -107,7 +107,7 @@ meanDist2 <- mean(dist2)
 sigmaDist2 <- sd(dist2)
 
 abline(
-  v = c(meanDist2 - 3*sigmaDist2, meanDist2, meanDist2 + 3*sigmaDist2), 
+  v = c(meanDist2 - 3*sigmaDist2, meanDist2, meanDist2 + 3*sigmaDist2),
   col = c("green", "red", "green"),
   lwd = 2
 )
@@ -127,7 +127,7 @@ fivenum(dist1)
 par(mfrow = c(1, 2))
 
 plot(
-  density(dist1), 
+  density(dist1),
   lwd = 2,
   main = "Density",
   xlab = "Normal Distribution",
@@ -139,14 +139,14 @@ plot(
 abline(
   v = fivenum(dist1),
   col = c("black", "red", "red", "red", "black"),
-  lwd = c(1.5, rep(2, 3), 1.5), 
+  lwd = c(1.5, rep(2, 3), 1.5),
   lty = c(1, rep(3, 3), 1)
 )
 summary(dist1)
 
 # Dist2
 plot(
-  density(dist2), 
+  density(dist2),
   lwd = 2,
   main = "Density",
   xlab = "Normal Distribution",
@@ -246,8 +246,8 @@ mean(tv_viewing_times_new, trim = 0.05)
 set.seed(4012)
 
 fruits <- sample(
-  x = c("Apple", "Banana", "Blackberry", "Peach"), 
-  size = 100, 
+  x = c("Apple", "Banana", "Blackberry", "Peach"),
+  size = 100,
   replace = T,
   prob = c(0.4, 0.1, 0.3, 0.2)
 )
@@ -310,3 +310,71 @@ pie(
 
 #   Броя на цветовете е хубаво да бъде равен на броя на категориите. В противен случай два сигмента
 #   ще бъдат оцветени в един и същи цвят.
+pie_percent <- round(100 * cities.table / sum(cities.table), 1)
+
+colors = rainbow(length(cities.table))
+pie(
+  cities.table,
+  labels = paste(names(pie_percent), '-', pie_percent), # !!
+  main = "City pie chart",
+  col = colors
+)
+
+legend(
+  x = "topright",
+  legend = c("London", "New York", "Singapore", "Mumbai"),
+  cex = 0.8,
+  fill = colors
+)
+?legend
+#   x - разположение на графиката - може да слагате както координати, така и да описвате позицията
+#   legend - имената на категориите
+#   cex - големината на текста
+#   fill - цвета, на който отговаря текста в легендата
+
+#   4.4.    Boxplot
+#   При едномерния анализ, boxplot-а се използва, за да откриване на потенциални outlier-и.
+tv_viewing_times <- c(25, 41, 27, 32, 43, 66, 35, 31, 15, 5, 34, 26, 32, 38, 16, 30, 38, 30, 20, 21)
+tv_viewing_times_new <- c(tv_viewing_times, 240)
+
+par(mfrow = c(1, 2))
+boxplot(
+  tv_viewing_times,
+  col = "powderblue",
+  main = "Boxplot",
+  xlab = "TV viewing"
+)
+
+boxplot(
+  tv_viewing_times_new,
+  horizontal = T,
+  col = "palevioletred",
+  main = "Boxplot",
+  xlab = "TV viewing + outlier"
+)
+par(mfrow = c(1, 1))
+
+# 4.5. Q-Q plot
+# Проверяваме дали стойностите на наблюдаваната променлива се доближават до теоретичните
+# стойности на някое разпределение.
+emp <- c(19.14, 6.29, 17.02, 6.13, 1.63, 18.78, 9.43, 11.21, 2.89, 9.52, 9.49, 4.83, 13.26, -0.96,
+         5.12, 1.39, 6.76, 2.1, 4.32, 1.38, 10.7, 9.01, 4.73, 11.59, 7.22, 1.53, 8.36, 10.91, 6.49,
+         3.69, 2.06, 15.92, 16.76, 18.13, 10.22, 19.25, 9.65, 17.75, 2.52, 1.24, 18.51, 11.52, 14.67,
+         12.65, 11.22, 27.78, 1.76, 9.64, 11.42, 12.29)
+
+d1 <- rnorm(n = 10^2, mean(emp), sd = sd(emp))
+d2 <- rcauchy(n = 10^2, location = mean(emp), scale = sd(emp))
+?rcauchy
+
+par(mfrow = c(1, 2))
+
+qqplot(emp, d1, ylab = "theoretical distribution", main = "Check for normal distr")
+abline(a = 0, b = 1)
+
+qqplot(emp, d2, ylab = "theoretical distribution", main = "Check for cauchy distr")
+abline(a = 0, b = 1)
+
+par(mfrow = c(1, 1))
+
+# abline() - чертае права линия
+# a - изместване по Х, b - ъгъл на правата, v - вертикална линия, h - хоризонтална линия
