@@ -56,3 +56,20 @@ Ex3.
 - Q-Q plot
 - Cauchy Distribution
 - QQ-plot - last example
+
+Ex4.
+- Групиране на данни по цилиндри
+- Margin parameter на prop.table
+- Корелации
+- Ког какви графики използваме
+- Boxplot!!!!
+- Типовете на връзките
+- Какво прави ~
+- Lower Hinge - Upper Hinge
+- Какви параметри приема runif, rnorm и т.н.
+- Корелациите - интервали 
+- lm function
+- Pearson, Spearman, Kendall
+- Линейна регресия
+- OLS метод
+- 
