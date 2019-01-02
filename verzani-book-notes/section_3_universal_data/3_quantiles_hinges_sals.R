@@ -18,13 +18,21 @@ median(sals)
 
 
 # https://www.statisticshowto.datasciencecentral.com/upper-hinge-lower-hinge/
-fivenum(sals) # min, Lower Hinge, Median, upper hinge, max
+# https://stats.stackexchange.com/questions/156778/percentile-vs-quantile-vs-quartile
+# https://math.stackexchange.com/questions/398077/question-on-five-number-summary-quantile
+
+fivenum(sals) # Min, Lower Hinge, Median, Upper hinge, Max
 summary(sals)
+
+data <- c(1, 2, 3, 4)
+fivenum(data) # Min, Lower Hinge, Median, Upper hinge, Max
+summary(data)
 
 # Quantile funciton
 data = c(10, 17, 18, 25, 28, 28)
+
 quantile(data)
-quantile(data, 0.25)
+quantile(data, 0.1)
 quantile(data, .25)
 quantile(data, c(.25, .75))
 

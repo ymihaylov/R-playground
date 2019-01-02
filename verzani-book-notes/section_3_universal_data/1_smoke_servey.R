@@ -5,6 +5,8 @@
 # but we may also look at the data graphically
 # with bar graphs or pie charts.
 
+# Ties - two or more data points with the same values
+
 # Smoking servey
 smoke_servey = c("Yes", "No", "No", "Yes", "Yes")
 
