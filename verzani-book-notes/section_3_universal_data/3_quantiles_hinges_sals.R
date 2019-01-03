@@ -66,6 +66,11 @@ median(abs(sals - median(sals))) * 1.4826
 
 # -------------------
 # Stem-and-leaf Charts
+scores <- scan() # 2 3 16 23 14 12 4 13 2 0 0 0 6 28 31 14 4 8 2 5
+apropos("stem")
+stem(da)
+
+
 
 
 
