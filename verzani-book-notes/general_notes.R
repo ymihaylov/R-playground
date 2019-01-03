@@ -5,3 +5,11 @@
 # - IQR
 # - Tails 
 # - Outliners
+# - Categorical and numerical data 
+# - Stem-and-leaf Charts
+# - median-absolute-deviation
+# - central theory limit
+# - histogram
+# - rug and jitter
+# - Probability density
+# - The "Statistical Tie"

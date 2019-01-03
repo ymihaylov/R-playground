@@ -81,5 +81,3 @@ cats
 table(cats) # organize
 levels(cats) <- c("poor", "rich", "rolling in it") # change labels
 table(cats)
-
-
