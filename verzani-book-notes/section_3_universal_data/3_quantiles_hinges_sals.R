@@ -68,10 +68,18 @@ median(abs(sals - median(sals))) * 1.4826
 # Stem-and-leaf Charts
 scores <- scan() # 2 3 16 23 14 12 4 13 2 0 0 0 6 28 31 14 4 8 2 5
 apropos("stem")
-stem(da)
+table(scores)
+stem(scores)
+?stem
+stem(scores, scale=2)
 
-
-
-
+# Making the numerical data categorical
+sals <- c(12, .4, 5, 2, 50, 8, 3, 1, 4, .25)
+# We want to break that data into the intervals [0; 1]; (1; 5]; (5; 50]
+cats = cut(sals, breaks=c(0, 1, 5, max(sals))) # specify the breaks 
+cats
+table(cats) # organize
+levels(cats) <- c("poor", "rich", "rolling in it") # change labels
+table(cats)
 
 
