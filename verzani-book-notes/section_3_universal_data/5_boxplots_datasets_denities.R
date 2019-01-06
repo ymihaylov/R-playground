@@ -45,4 +45,4 @@ attach(faithful) # make eruptions visible
 hist(eruptions, 15, prob=T) # proportions, not frequencies
 density(eruptions)
 lines(density(eruptions)) # lines makes a curve, default bandwidth
-
+lines(density(eruptions, bw="SJ"), col='red') # Use SJ bandwidth, in red
