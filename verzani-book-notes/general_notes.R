@@ -13,6 +13,10 @@
 # - rug and jitter
 # - Probability density
 # - The "Statistical Tie"
+# - Linear Regression
+# - Residual
+# - Correlation coeficients
+# - Spearman rank correlation,
 
 
 # Problems solutions - https://github.com/buruzaemon/simpleR/
