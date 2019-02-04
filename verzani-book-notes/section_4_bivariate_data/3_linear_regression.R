@@ -34,3 +34,7 @@ rank(c(2,3,5,7,11))
 rank(c(5,3,2,7,11))
 rank(c(5,5,2,7,5))
 cor(rank(x), rank(y))
+
+# ----
+# Example Presidential Elections: Florida
+
