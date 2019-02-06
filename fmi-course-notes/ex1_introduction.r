@@ -38,6 +38,9 @@ str(v1)
 str(v2)
 str(v12) # Casted to string vector
 
+str(c(1, 2, 'p'))
+typeof(c(1, 2, 'p'))
+
 # Date vector
 v3 = as.Date(c("2015-01-01", "2016-07-08"))
 ?as.Date # Convert strings to dates
@@ -59,8 +62,21 @@ as.Date(v1)
 # Origin is start date of countring
 as.Date(v1, origin = "2011-01-01")
 
+v1.temp = c(1, 2, 2, 4, 5, 7, 18, -19)
 # Gets length of the vector
-length(v1)
+length(v1.temp)
+
+# Gets max value
+max(v1)
+
+# Gets sum of elements
+sum(v1)
+
+# Check which element is 2
+v1.temp == 2
+
+# Count of elements equals to 2
+sum(v1.temp == 2)
 
 # Get element from vector
 # Indexing starts from 1!
@@ -72,10 +88,17 @@ v1[c(1, length(v1))]
 # Vector with four times third element of v1
 v1[c(3, 3, 3, 3)]
 
-# Create a sequances
+# Create a sequences
 # Returns vector with elemnents 1 to 10
 1:10
 10:1
+
+# Multiplies vector
+temp = 1;
+for (i in 1:3) {
+  temp = temp * i
+}
+temp
 
 # Equivalent, but with function
 seq(from = 1, to = 10, by = 1)
@@ -85,7 +108,13 @@ seq(from = 10, to = 1, by = -1)
 v1[c(3, 6, 1:4)]
 
 # In R we can create a subvector. The values that we DON'T want!
+# Не искаме елементите от 3 до 6
 v1[-c(3, 6)]
+
+# Всички елементи без първия
+v1[-1]
+
+# Всички елементи без от 3ти до 6ти
 v1[-(3:6)]
 
 #   За да не ни се налага да се чудим какви числа да измисляме всеки път, то най-добре е
@@ -100,6 +129,8 @@ v1[-(3:6)]
 #   В упражненията ще учите подробно различните вероятностни разпределения, но за момента е
 #   достатъчно да знаем, че този вид разпределение се нарича "равномерно".
 
+#   Равномерно разпределение е когато всяка една от стойностите е с равна вероятност да се падне.
+
 # Histogram of random numbers
 # Uniform Distribution
 hist(
@@ -107,17 +138,17 @@ hist(
   col = "red",
   main = "Histogram",
   xlab = "Pseudo random numbers"
-)
+) # чертае хистограма на данните 
 
-runif(n = 10^3, min = 1, max = 5.9999)
-trunc(runif(n = 10^3, min = 1, max = 5.9999))
-table(trunc(runif(n = 10^3, min = 1, max = 5.9999)))
+runif(n = 10^3, min = 1, max = 5.9999) # Прави random 1000 числа със стойности от 1 до 6
+trunc(runif(n = 10^3, min = 1, max = 5.9999)) # trunc маха дробната част от числата
+table(trunc(runif(n = 10^3, min = 1, max = 5.9999))) 
 ?runif
 ##############################
 
 # Set Seed and Uniform Distribution
 set.seed(1806)
-v4 = trunc(runif(n = 20, min = 1, max = 40.99999))
+v4 = trunc(runif(n = 20, min = 1, max = 40.99999)) # генерира равномерно разпределени числа
 set.seed(2713)
 v5 <- round(runif(n = length(v4), min = 1, max = 40.99999))
 set.seed(189)
@@ -129,12 +160,18 @@ v6 <- round(runif(n = length(v4) - 7, min = 1, max = 40.99999))
 # Operations with vectors
 # Add 3 to every element
 v4 + 3
+
 # Miltiply every element from vector with 2
 v4 * 2
+
 # Complex expression
-v4/7 + 11
-# Скаларно произведение
+(v4/7) + 11
+
+# Скаларно произведение 
+# Вектор по вектор 
+# Трябва да са с равни дължини двата вектора 
 v4 * v5
+
 # Дава предупреждение, защото дължината на втория вектор не е кратна на първия.
 v4 * v6
 
@@ -159,14 +196,15 @@ func2 <- function(a, b = 2, c = 3) {
   return (a + b + c)
 }
 
+# С paste се конкатенират string-ове
+
 func2(3, 3, 1)
 func2(b = 3, c = 3, a = 1)
-func2(1, c = 3)
-# ERROR - a doesnt have default value
-func2(b = 2, c = 3)
+func2(1, c = 3) 
+func2(b = 2, c = 3) # ERROR - a doesnt have default value
 
 # Check for value in the function
-#   Командата "missing" проверява дали имаме стойност за параметъра "a"
+#   Командата "missing" проверява дали имаме стойност за параметъра "a"!
 #   С "print()" извеждаме съобщение
 #   С "rnorm(n = 1)" генерираме една (n = 1) нормално разпределена случайна величина
 #   с очакване 0 и стандартно отклонение 1
@@ -177,6 +215,8 @@ func3 <- function(a, b = 0, c = 0) {
   }
   return(a + b + c)
 }
+rnorm(n = 1) # Генерира нормално разпределение
+
 func3(b = 2, c = 3)
 
 func4 <- function(a, b = 2, c = 3) {
@@ -270,7 +310,7 @@ M1 <- matrix(data = 1:12, nrow = 4, ncol = 3)
 
 # Fill by row
 M2 <- matrix(data = 1:12, nrow = 4, ncol = 3, byrow = T)
-
+M2[,2]
 M1
 M2
 
@@ -296,6 +336,7 @@ M3 + 4
 #   Добавяме по вектор към всеки от четирите колони
 M3 + 5*c(1:7)
 M3
+M3 + c(1:4)
 
 #   Добавяме ред вектор всеки от седемте реда на матрицата
 M3 + 5*c(1:4)
@@ -318,7 +359,6 @@ dim(M34)
 nrow(M34)
 # Number of cols
 ncol(M34)
-
 
 #   Функцията apply се прилага върху матрици, data.frame и други производни структури.
 #   Първият параметър е множеството от данни, вторият показва по редове (1) или колони (2) искаме
