@@ -31,3 +31,6 @@ typeof(c(1, 2)) # all elements are double
 v3 = as.Date(c("2015-01-01", "2016-07-08"))
 
 # Operations with matrices
+# Which date frames ex2
+# Чертаене на хистограма - ex2
+# table и prop.table

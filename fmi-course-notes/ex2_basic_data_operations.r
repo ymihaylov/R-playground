@@ -150,14 +150,14 @@ boys_dating_diary["try_1", c("girl_names", "accept")]
 # Връща реда
 which(boys_dating_diary$accept)
 # Prints the rows
-boys_dating_diary[which(boys_dating_diary_2$accept), ]
+boys_dating_diary[which(boys_dating_diary$accept), girl_names]
 # Prints only the names
 boys_dating_diary[which(boys_dating_diary$accept), "girl_names"]
 
 # More complex filter
-boys_dating_diary[which(boys_dating_diary_2$rating >= 7 & boys_dating_diary_2$accept), ]
+boys_dating_diary[which(boys_dating_diary$rating >= 7 & boys_dating_diary$accept), ]
 # Returns only FALSE AND TRUE for every row
-boys_dating_diary_2$rating >= 7
+boys_dating_diary$rating >= 7
 
 # Where IN
 boys_dating_diary[which(boys_dating_diary$girl_names %in% c("Doris Parker", "Theresa Watson")), ]
