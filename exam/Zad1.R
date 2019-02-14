@@ -47,3 +47,19 @@ variationFunction <- function(x) {
 ##### - Цикъл for - задача
 
 ##### - Корелация
+
+x = c(1, 2, 3, 4, 5)
+which(x > 3)
+sum(x > 4)
+?binom
+
+
+sum = function (n) {
+  x = 1:5
+}
+
+sum(5)
+
+x=1:5
+
+
